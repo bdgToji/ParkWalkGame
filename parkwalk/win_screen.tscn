@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpir4p3xrscnj"]
+
+[ext_resource type="Script" path="res://WinScreen.cs" id="1_6eao3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wwqp"]
+font_size = 113
+font_color = Color(0.974173, 0.520137, 0.53798, 1)
+outline_size = 10
+
+[node name="WinScreen" type="CanvasLayer"]
+script = ExtResource("1_6eao3")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -552.5
+offset_top = 30.0
+offset_right = 552.5
+offset_bottom = 195.0
+grow_horizontal = 2
+focus_neighbor_bottom = NodePath("../RestartButton")
+text = "You Win"
+label_settings = SubResource("LabelSettings_3wwqp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -50.0
+offset_right = 98.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="."]
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.775
+anchor_right = 0.5
+anchor_bottom = 0.795
+offset_left = -53.196
+offset_top = -53.0
+offset_right = 53.196
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+focus_neighbor_top = NodePath("../RestartButton")
+text = "Quit
+"

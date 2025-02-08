@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://7lpkaavinjxj"]
+
+[ext_resource type="Shader" path="res://Water.gdshader" id="1_fsxs0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w2n66"]
+size = Vector2(32, 32)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sng5b"]
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2pw6n"]
+width = 500
+height = 500
+seamless = true
+noise = SubResource("FastNoiseLite_sng5b")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ir5uh"]
+fractal_octaves = 2
+fractal_gain = 2.24
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gdk73"]
+width = 500
+height = 500
+seamless = true
+noise = SubResource("FastNoiseLite_ir5uh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hnwu"]
+render_priority = 0
+shader = ExtResource("1_fsxs0")
+shader_parameter/wave_speed = 0.2
+shader_parameter/wave_height = 5.0
+shader_parameter/water_color = Color(0.280434, 0.452542, 0.81547, 1)
+shader_parameter/stylize_amount = 1.0
+shader_parameter/water_layer1 = SubResource("NoiseTexture2D_2pw6n")
+shader_parameter/water_layer2 = SubResource("NoiseTexture2D_gdk73")
+
+[node name="WaterTile" type="Node3D"]
+
+[node name="Water" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_w2n66")
+surface_material_override/0 = SubResource("ShaderMaterial_8hnwu")

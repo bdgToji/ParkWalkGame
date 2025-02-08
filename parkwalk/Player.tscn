@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://btbpio7p4rf1d"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_blh5q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k2cci"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_blh5q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_k2cci")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="CameraPivot"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn5xrftc6m2ii"]
+
+[ext_resource type="Shader" path="res://Water.gdshader" id="1_sxw4a"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o07lx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gjyyb"]
+fractal_octaves = 3
+fractal_gain = 1.35
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kw856"]
+seamless = true
+noise = SubResource("FastNoiseLite_gjyyb")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f4vt3"]
+fractal_octaves = 3
+fractal_gain = 1.285
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_stjoh"]
+seamless = true
+noise = SubResource("FastNoiseLite_f4vt3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8qje"]
+render_priority = 0
+shader = ExtResource("1_sxw4a")
+shader_parameter/wave_speed = 0.2
+shader_parameter/wave_height = 5.0
+shader_parameter/water_color = Color(0.282353, 0.45098, 0.815686, 1)
+shader_parameter/stylize_amount = 1.0
+shader_parameter/water_layer1 = SubResource("NoiseTexture2D_kw856")
+shader_parameter/water_layer2 = SubResource("NoiseTexture2D_stjoh")
+
+[node name="WaterFall" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-6.18146e-07, 2.60289, 0, -14.1415, -1.13776e-07, 0, 0, 0, 2.55552, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_o07lx")
+surface_material_override/0 = SubResource("ShaderMaterial_h8qje")

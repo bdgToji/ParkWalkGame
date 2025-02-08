@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfx0ei1wkh5ye"]
+
+[ext_resource type="ArrayMesh" uid="uid://lgdymxb4mvw5" path="res://models/Coin.obj" id="1_4am3w"]
+[ext_resource type="Script" path="res://Coin.cs" id="1_ft8jp"]
+[ext_resource type="Texture2D" uid="uid://dn8gix8pwe8i5" path="res://textures/coin_texture.png" id="2_ek6s8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_e3njv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bf5r"]
+albedo_texture = ExtResource("2_ek6s8")
+
+[sub_resource type="Animation" id="Animation_tr64w"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_lccbs"]
+resource_name = "Rotate"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 4, 8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-6.28319, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 6.28319, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 4, 8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 4, 8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h1qmh"]
+_data = {
+"RESET": SubResource("Animation_tr64w"),
+"Rotate": SubResource("Animation_lccbs")
+}
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_ft8jp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_e3njv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.434917, 0, 0, 0, 0.434917, 0, 0, 0, 0.5393, 0, 0, 0)
+mesh = ExtResource("1_4am3w")
+surface_material_override/0 = SubResource("StandardMaterial3D_2bf5r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h1qmh")
+}
+autoplay = "Rotate"

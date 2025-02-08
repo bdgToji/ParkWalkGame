@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://rw7hm21hjat4"]
+
+[ext_resource type="ArrayMesh" uid="uid://cwrc3ph64oj5c" path="res://models/WaterFountain.obj" id="1_j07a8"]
+[ext_resource type="Shader" path="res://Water.gdshader" id="1_ny7o7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lum6q"]
+fractal_octaves = 6
+fractal_gain = 0.925
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nus7f"]
+seamless = true
+noise = SubResource("FastNoiseLite_lum6q")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_akak3"]
+fractal_octaves = 6
+fractal_gain = 0.735
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2gp0u"]
+seamless = true
+noise = SubResource("FastNoiseLite_akak3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjlsy"]
+render_priority = 0
+shader = ExtResource("1_ny7o7")
+shader_parameter/wave_speed = 0.2
+shader_parameter/wave_height = 5.0
+shader_parameter/water_color = Color(0.282353, 0.45098, 0.815686, 1)
+shader_parameter/stylize_amount = 1.0
+shader_parameter/water_layer1 = SubResource("NoiseTexture2D_nus7f")
+shader_parameter/water_layer2 = SubResource("NoiseTexture2D_2gp0u")
+
+[node name="WaterFountain" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_j07a8")
+surface_material_override/0 = SubResource("ShaderMaterial_jjlsy")
